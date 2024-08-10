@@ -1,4 +1,4 @@
-// VariableLengthQuantity.h - Declares the VariableLengthQuantity class.
+// Track.h - Declares the Track class.
 //
 // Copyright (C) 2024 Stephen Bonar
 //
@@ -14,46 +14,45 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef MIDI_DATA_VARIABLE_LENGTH_QUANTITY_H
-#define MIDI_DATA_VARIABLE_LENGTH_QUANTITY_H
+#ifndef MIDI_DATA_TRACK_H
+#define MIDI_DATA_TRACK_H
 
 #include <vector>
-#include <sstream>
-#include "BinData.h"
-#include "Constants.h"
+#include <memory>
 #include "Decoder.h"
+#include "TrackEvent.h"
+#include "EventType.h"
+#include "StatusByte.h"
+#include "BinData.h"
 
 namespace MidiData
 {
-    class VariableLengthQuantity : public Decoder
+    class Track : public Decoder
     {
     public:
-        VariableLengthQuantity() : hasDecoded{ false } { }
-
-        virtual size_t Size() override { return bytes.size(); }
+        Track(std::shared_ptr<BinData::ChunkHeader> trackHeader) 
+            : hasDecoded{ false }, trackHeader{ trackHeader } 
+        { }
 
         virtual bool HasDecoded() override { return hasDecoded; }
 
-        virtual std::string ToString() override;
+        virtual size_t Size() override { return trackHeader->Size()->Value(); }
 
-        int Value();
+        virtual std::string ToString() override { return "Track"; }
+
+        std::vector<std::shared_ptr<TrackEvent>> Events() { return events; }
     protected:
-        virtual bool HasSubDecoders() override { return false; }
+        virtual bool HasSubDecoders() override;
 
-        virtual std::shared_ptr<Decoder> NextSubDecoder() override 
-        {
-            return nullptr;
-        };
+        virtual std::shared_ptr<Decoder> NextSubDecoder() override;
 
-        virtual size_t BytesDecoded() override 
-        { 
-            return hasDecoded ? bytes.size() : 0; 
-        }
+        virtual size_t BytesDecoded() override;
 
         virtual void FinishDecoding(BinData::FileStream* s) override;
     private:
         bool hasDecoded;
-        std::vector<BinData::UInt8Field> bytes;
+        std::shared_ptr<BinData::ChunkHeader> trackHeader;
+        std::vector<std::shared_ptr<TrackEvent>> events;
     };
 }
 

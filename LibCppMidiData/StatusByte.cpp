@@ -16,6 +16,8 @@
 
 #include "StatusByte.h"
 
+using namespace MidiData;
+
 size_t StatusByte::BytesDecoded()
 {
     if (hasDecoded)
@@ -24,22 +26,22 @@ size_t StatusByte::BytesDecoded()
         return 0;
 }
 
-MidiEventType StatusByte::EventType()
+EventType StatusByte::EventType()
 {
     switch (byte->Value() >> StatusCodeTypeBitShift)
     {
         case EventControlChangeMessage:
-            return MidiEventType::ControlChangeMessage;
+            return EventType::ControlChangeMessage;
         case EventProgramChangeMessage:
-            return MidiEventType::ProgramChangeMessage;
+            return EventType::ProgramChangeMessage;
         case EventPitchWheelChangeMessage:
-            return MidiEventType::PitchWheelChangeMessage;
+            return EventType::PitchWheelChangeMessage;
         case EventNoteOnMessage:
-            return MidiEventType::NoteOnMessage;
+            return EventType::NoteOnMessage;
         case EventSystemMessage:
-            return MidiEventType::SystemMessage;
+            return EventType::SystemMessage;
         default:
-            return MidiEventType::Unknown;
+            return EventType::Unknown;
     }
 }
 

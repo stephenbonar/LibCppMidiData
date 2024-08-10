@@ -16,6 +16,8 @@
 
 #include "VariableLengthQuantity.h"
 
+using namespace MidiData;
+
 void VariableLengthQuantity::FinishDecoding(BinData::FileStream* s)
 {
     BinData::UInt8Field currentByte{ 0, BinData::Endianness::Big };
