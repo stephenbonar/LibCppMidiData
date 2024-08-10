@@ -1,0 +1,3 @@
+[submodule "LibCppBinData"]
+	path = LibCppBinData
+	url = https://github.com/stephenbonar/LibCppBinData
