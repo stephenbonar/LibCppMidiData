@@ -23,6 +23,7 @@
 
 namespace MidiData
 {
+    /// @brief Represents the data contained within 
     class FileHeaderData : public BinData::FieldStruct
     {
     public:

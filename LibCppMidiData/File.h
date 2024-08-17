@@ -26,19 +26,29 @@
 
 namespace MidiData
 {
+    /// @brief Represents a MIDI file.
     class File : public BinData::RawFile
     {
     public:
+        /// @brief Default constructor; creates a new instance of MidiData::File.
+        /// @param fileName The path to the MIDI file.
         File(std::string fileName) : 
             BinData::RawFile{ fileName }, fileHeader{ BinData::Endianness::Big } 
         { }
 
+        /// @brief Gets the MIDI file's header.
+        /// @return The BinData::ChunkHeader representing the file header.
         BinData::ChunkHeader Header() { return fileHeader; }
 
+        /// @brief Gets the MIDI file header's data.
+        /// @return The data contained within the MIDI file's header.
         FileHeaderData HeaderData() { return headerData; }
 
+        /// @brief Loads the MIDI file, including all headers and tracks.
         void Load();
 
+        /// @brief Gets the tracks in the MIDI file.
+        /// @return A vector that contains each MidiData::Track in the file.
         std::vector<Track> Tracks() { return tracks; }
     private:
         BinData::ChunkHeader fileHeader;

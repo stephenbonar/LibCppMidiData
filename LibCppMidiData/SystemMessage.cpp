@@ -37,5 +37,5 @@ void SystemMessage::StartDecoding(BinData::FileStream* s)
 
 void SystemMessage::FinishDecoding(BinData::FileStream* s)
 {
-    UpdateTypeInfo(subDecoder.get());
+    CombineSubDecoderInfo(subDecoder.get());
 }

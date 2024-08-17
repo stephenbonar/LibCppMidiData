@@ -40,5 +40,5 @@ void TrackEvent::StartDecoding(BinData::FileStream* s)
 void TrackEvent::FinishDecoding(BinData::FileStream* s)
 {
     dataText += deltaTime->ToString();
-    UpdateTypeInfo(midiEvent.get());
+    CombineSubDecoderInfo(midiEvent.get());
 }

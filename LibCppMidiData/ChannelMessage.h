@@ -25,6 +25,7 @@
 
 namespace MidiData
 {
+    
     class ChannelMessage : public Message
     {
     public:

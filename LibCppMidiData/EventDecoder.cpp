@@ -121,7 +121,7 @@ void EventDecoder::DecodeDataField(std::string label,
     details += " " + label + " " + f->ToString();
 }
 
-void EventDecoder::UpdateTypeInfo(EventDecoder* subDecoder)
+void EventDecoder::CombineSubDecoderInfo(EventDecoder* subDecoder)
 {
     type = subDecoder->Type();
     typeText += " " + subDecoder->TypeText();
@@ -129,9 +129,3 @@ void EventDecoder::UpdateTypeInfo(EventDecoder* subDecoder)
     details += " " + subDecoder->Details();
 }
 
-/*
-void MidiEventDecoder::FinishDecoding(BinData::FileStream* s)
-{
-    if (subDecoder != nullptr)
-        subDecoder->Decode(s);
-}*/

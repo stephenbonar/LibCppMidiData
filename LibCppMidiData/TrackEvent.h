@@ -29,6 +29,10 @@
 
 namespace MidiData
 {
+    /// @brief Represents a MIDI track event (MTrk).
+    ///
+    /// The MIDI track event or MTrk event is the highest level event in a MIDI
+    /// track. 
     class TrackEvent : public EventDecoder
     {
     public:

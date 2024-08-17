@@ -41,5 +41,5 @@ void MetaEvent::StartDecoding(BinData::FileStream* s)
 
 void MetaEvent::FinishDecoding(BinData::FileStream* s)
 {
-    UpdateTypeInfo(subDecoder.get());
+    CombineSubDecoderInfo(subDecoder.get());
 }
